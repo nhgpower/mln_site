@@ -109,72 +109,116 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* Key Topics Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
-            {/* Foundation Topic */}
-            <Card className="bg-background border-0 shadow-sm hover:shadow-lg transition-all duration-300 group">
-              <CardHeader className="pb-4">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="p-3 bg-primary/10 rounded-xl group-hover:bg-primary/20 transition-colors duration-300">
+          {/* Knowledge Summary Overview */}
+          <div className="bg-background rounded-2xl p-8 lg:p-12 shadow-sm mb-16">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Core Concepts */}
+              <div className="space-y-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="p-3 bg-primary/10 rounded-xl">
                     <RefreshCw className="h-6 w-6 text-primary" />
                   </div>
-                  <Badge variant="secondary" className="text-xs">
-                    Nền Tảng Cơ Bản
-                  </Badge>
+                  <h3 className="font-heading text-lg text-secondary-foreground">
+                    Khái Niệm Cốt Lõi
+                  </h3>
                 </div>
-                <CardTitle className="font-heading text-xl text-secondary-foreground">
-                  Tái Sản Xuất - Nền Tảng Hình Thành Giá Trị Thặng Dư
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="font-paragraph text-secondary-foreground/70 leading-relaxed mb-4">
-                  Hiểu về cơ chế tái sản xuất giản đơn và mở rộng, nền tảng dẫn đến việc tích lũy tư bản và tạo ra giá trị thặng dư.
-                </CardDescription>
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-sm text-secondary-foreground/60">
-                    <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
-                    <span>Khái niệm tái sản xuất</span>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="font-paragraph text-sm text-secondary-foreground/70 leading-relaxed">
+                      <strong>Tái sản xuất:</strong> Nền tảng của việc tạo ra và tích lũy giá trị thặng dư
+                    </p>
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-secondary-foreground/60">
-                    <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
-                    <span>Hai hình thức tái sản xuất</span>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="font-paragraph text-sm text-secondary-foreground/70 leading-relaxed">
+                      <strong>Giá trị thặng dư:</strong> Phần giá trị vượt quá chi phí sản xuất ban đầu
+                    </p>
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-secondary-foreground/60">
-                    <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
-                    <span>Ví dụ minh họa thực tế</span>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="font-paragraph text-sm text-secondary-foreground/70 leading-relaxed">
+                      <strong>Tích lũy tư bản:</strong> Quá trình chuyển đổi giá trị thặng dư thành tư bản mới
+                    </p>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
 
-            {/* Dynamic Categories */}
-            {categories.length > 0 && categories.slice(0, 1).map((category, index) => {
-              const icons = [TrendingUp, GraduationCap, BarChart3, BookOpen];
-              const IconComponent = icons[index % icons.length];
-              
-              return (
-                <Card key={category._id} className="bg-background border-0 shadow-sm hover:shadow-lg transition-all duration-300 group">
-                  <CardHeader className="pb-4">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="p-3 bg-primary/10 rounded-xl group-hover:bg-primary/20 transition-colors duration-300">
-                        <IconComponent className="h-6 w-6 text-primary" />
-                      </div>
-                      <Badge variant="secondary" className="text-xs">
-                        Chủ đề {category.displayOrder || index + 1}
-                      </Badge>
-                    </div>
-                    <CardTitle className="font-heading text-xl text-secondary-foreground">
-                      {category.categoryName}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="font-paragraph text-secondary-foreground/70 leading-relaxed">
-                      {category.categoryDescription}
-                    </CardDescription>
-                  </CardContent>
-                </Card>
-              );
-            })}
+              {/* Economic Mechanisms */}
+              <div className="space-y-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="p-3 bg-primary/10 rounded-xl">
+                    <TrendingUp className="h-6 w-6 text-primary" />
+                  </div>
+                  <h3 className="font-heading text-lg text-secondary-foreground">
+                    Cơ Chế Kinh Tế
+                  </h3>
+                </div>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="font-paragraph text-sm text-secondary-foreground/70 leading-relaxed">
+                      <strong>Thị trường lao động:</strong> Nơi hình thành và trao đổi sức lao động
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="font-paragraph text-sm text-secondary-foreground/70 leading-relaxed">
+                      <strong>Quá trình sản xuất:</strong> Cách thức tạo ra giá trị sử dụng và giá trị thặng dư
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="font-paragraph text-sm text-secondary-foreground/70 leading-relaxed">
+                      <strong>Phân phối lợi nhuận:</strong> Cách giá trị thặng dư được chia sẻ trong xã hội
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Practical Applications */}
+              <div className="space-y-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="p-3 bg-primary/10 rounded-xl">
+                    <BarChart3 className="h-6 w-6 text-primary" />
+                  </div>
+                  <h3 className="font-heading text-lg text-secondary-foreground">
+                    Ứng Dụng Thực Tiễn
+                  </h3>
+                </div>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="font-paragraph text-sm text-secondary-foreground/70 leading-relaxed">
+                      <strong>Phân tích doanh nghiệp:</strong> Hiểu cách công ty tạo ra lợi nhuận
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="font-paragraph text-sm text-secondary-foreground/70 leading-relaxed">
+                      <strong>Chính sách kinh tế:</strong> Đánh giá tác động của các chính sách lên xã hội
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="font-paragraph text-sm text-secondary-foreground/70 leading-relaxed">
+                      <strong>Đầu tư và tài chính:</strong> Ứng dụng trong quyết định đầu tư cá nhân
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Summary Statement */}
+            <div className="mt-8 pt-8 border-t border-secondary-foreground/10">
+              <div className="text-center">
+                <p className="font-paragraph text-secondary-foreground/80 leading-relaxed max-w-4xl mx-auto">
+                  Khóa học cung cấp <strong>kiến thức toàn diện về giá trị thặng dư</strong> - từ lý thuyết cơ bản đến ứng dụng thực tiễn, 
+                  giúp bạn hiểu sâu về <strong>cơ chế hoạt động của nền kinh tế thị trường</strong> và 
+                  <strong>phát triển tư duy phản biện</strong> về các vấn đề kinh tế - xã hội hiện đại.
+                </p>
+              </div>
+            </div>
           </div>
 
           {/* Learning Objectives */}
