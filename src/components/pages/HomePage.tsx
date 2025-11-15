@@ -91,7 +91,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
       {/* Knowledge Overview Section */}
       <section className="w-full bg-secondary py-16 lg:py-24">
         <div className="max-w-[100rem] mx-auto px-6 lg:px-8">
@@ -208,17 +207,8 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-
             {/* Summary Statement */}
-            <div className="mt-8 pt-8 border-t border-secondary-foreground/10">
-              <div className="text-center">
-                <p className="font-paragraph text-secondary-foreground/80 leading-relaxed max-w-4xl mx-auto">
-                  Khóa học cung cấp <strong>kiến thức toàn diện về giá trị thặng dư</strong> - từ lý thuyết cơ bản đến ứng dụng thực tiễn, 
-                  giúp bạn hiểu sâu về <strong>cơ chế hoạt động của nền kinh tế thị trường</strong> và 
-                  <strong>phát triển tư duy phản biện</strong> về các vấn đề kinh tế - xã hội hiện đại.
-                </p>
-              </div>
-            </div>
+
           </div>
 
           {/* Learning Objectives */}
@@ -285,7 +275,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
       {/* Knowledge Features Section */}
       <section className="w-full py-16 lg:py-24">
         <div className="max-w-[100rem] mx-auto px-6 lg:px-8">
@@ -352,7 +341,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
       {/* CTA Section */}
       <section className="w-full bg-primary py-16 lg:py-20">
         <div className="max-w-[100rem] mx-auto px-6 lg:px-8 text-center">
