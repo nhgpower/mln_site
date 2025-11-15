@@ -68,7 +68,6 @@ export default function KnowledgePage() {
           </div>
         </div>
       </section>
-
       {/* Table of Contents */}
       <section className="w-full py-16 bg-secondary">
         <div className="max-w-[100rem] mx-auto px-6 lg:px-8">
@@ -107,7 +106,6 @@ export default function KnowledgePage() {
           </div>
         </div>
       </section>
-
       {/* Main Content Sections */}
       {articles.map((article, index) => {
         const isEven = index % 2 === 0;
@@ -128,11 +126,9 @@ export default function KnowledgePage() {
                       Phần {index + 1}
                     </Badge>
                   </div>
-                  
                   <h2 className="font-heading text-3xl lg:text-4xl xl:text-5xl text-secondary-foreground mb-6 leading-tight">
                     {article.title}
                   </h2>
-                  
                   {article.summary && (
                     <div className="mb-8">
                       <h3 className="font-heading text-xl text-secondary-foreground mb-4">Tóm tắt</h3>
@@ -141,7 +137,6 @@ export default function KnowledgePage() {
                       </p>
                     </div>
                   )}
-                  
                   {article.content && (
                     <div className="prose prose-lg max-w-none">
                       <div className="font-paragraph text-secondary-foreground/90 leading-relaxed whitespace-pre-line">
@@ -149,19 +144,7 @@ export default function KnowledgePage() {
                       </div>
                     </div>
                   )}
-                  
-                  {article.author && (
-                    <div className="mt-8 pt-6 border-t border-secondary">
-                      <p className="font-paragraph text-sm text-secondary-foreground/60">
-                        Tác giả: <span className="font-medium text-secondary-foreground">{article.author}</span>
-                        {article.publishDate && (
-                          <span className="ml-4">
-                            Xuất bản: {new Date(article.publishDate).toLocaleDateString('vi-VN')}
-                          </span>
-                        )}
-                      </p>
-                    </div>
-                  )}
+
                 </div>
                 
                 {/* Image */}
@@ -182,7 +165,6 @@ export default function KnowledgePage() {
                 )}
               </div>
             </div>
-            
             {/* Section Separator */}
             {index < articles.length - 1 && (
               <div className="max-w-[100rem] mx-auto px-6 lg:px-8 mt-20">
@@ -192,7 +174,6 @@ export default function KnowledgePage() {
           </section>
         );
       })}
-
       {/* Summary Section */}
       <section className="w-full py-20 lg:py-24 bg-primary text-primary-foreground">
         <div className="max-w-[100rem] mx-auto px-6 lg:px-8">
