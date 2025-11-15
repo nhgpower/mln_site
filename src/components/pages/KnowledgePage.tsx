@@ -314,19 +314,7 @@ export default function KnowledgePage() {
                       </div>
                     </div>
                   )}
-                  
-                  {article.author && (
-                    <div className="mt-8 pt-6 border-t border-secondary">
-                      <p className="font-paragraph text-sm text-secondary-foreground/60">
-                        Tác giả: <span className="font-medium text-secondary-foreground">{article.author}</span>
-                        {article.publishDate && (
-                          <span className="ml-4">
-                            Xuất bản: {new Date(article.publishDate).toLocaleDateString('vi-VN')}
-                          </span>
-                        )}
-                      </p>
-                    </div>
-                  )}
+
                 </div>
                 
                 {/* Image */}
