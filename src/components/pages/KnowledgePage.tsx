@@ -2,16 +2,15 @@ import { useState, useEffect } from 'react';
 import { BaseCrudService } from '@/integrations';
 import { DanhmcKinthc, KinthcvGitrThngd } from '@/entities';
 import { Image } from '@/components/ui/image';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { BookOpen, GraduationCap, BarChart3, TrendingUp, Calendar, User, ArrowRight } from 'lucide-react';
+import { BookOpen, GraduationCap, BarChart3, TrendingUp, DollarSign, Users, Building, Target } from 'lucide-react';
 
 export default function KnowledgePage() {
   const [categories, setCategories] = useState<DanhmcKinthc[]>([]);
   const [articles, setArticles] = useState<KinthcvGitrThngd[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,10 +39,6 @@ export default function KnowledgePage() {
     fetchData();
   }, []);
 
-  const filteredArticles = selectedCategory 
-    ? articles.filter(article => article.title?.toLowerCase().includes(selectedCategory.toLowerCase()))
-    : articles;
-
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -58,246 +53,188 @@ export default function KnowledgePage() {
   return (
     <div className="min-h-screen">
       {/* Header Section */}
-      <section className="w-full bg-primary text-primary-foreground py-16 lg:py-20">
+      <section className="w-full bg-primary text-primary-foreground py-20 lg:py-24">
         <div className="max-w-[100rem] mx-auto px-6 lg:px-8">
-          <div className="text-center max-w-4xl mx-auto">
-            <Badge variant="outline" className="border-primary-foreground text-primary-foreground mb-6">
-              Kho Tàng Kiến Thức
+          <div className="text-center max-w-5xl mx-auto">
+            <Badge variant="outline" className="border-primary-foreground text-primary-foreground mb-8 text-sm">
+              Kiến Thức Toàn Diện
             </Badge>
-            <h1 className="font-heading text-4xl lg:text-5xl xl:text-6xl mb-6 leading-tight">
+            <h1 className="font-heading text-5xl lg:text-6xl xl:text-7xl mb-8 leading-tight">
               Giá Trị Thặng Dư Trong Nền Kinh Tế Thị Trường
             </h1>
-            <p className="font-paragraph text-lg lg:text-xl opacity-90 leading-relaxed">
-              Khám phá toàn bộ kiến thức về giá trị thặng dư, từ những khái niệm cơ bản đến các ứng dụng thực tiễn trong nền kinh tế thị trường hiện đại.
+            <p className="font-paragraph text-xl lg:text-2xl opacity-90 leading-relaxed max-w-4xl mx-auto">
+              Tìm hiểu toàn diện về khái niệm giá trị thặng dư, từ lý thuyết cơ bản đến ứng dụng thực tiễn trong nền kinh tế thị trường hiện đại.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Categories Navigation */}
-      <section className="w-full bg-secondary py-12">
+      {/* Table of Contents */}
+      <section className="w-full py-16 bg-secondary">
         <div className="max-w-[100rem] mx-auto px-6 lg:px-8">
-          <div className="text-center mb-8">
-            <h2 className="font-heading text-2xl lg:text-3xl text-secondary-foreground mb-4">
-              Danh Mục Kiến Thức
+          <div className="text-center mb-12">
+            <h2 className="font-heading text-3xl lg:text-4xl text-secondary-foreground mb-6">
+              Nội Dung Chính
             </h2>
-            <p className="font-paragraph text-secondary-foreground/80">
-              Chọn chủ đề để khám phá nội dung chi tiết
+            <p className="font-paragraph text-lg text-secondary-foreground/80 max-w-3xl mx-auto">
+              Khám phá từng khía cạnh của giá trị thặng dư qua các chủ đề được sắp xếp có hệ thống
             </p>
           </div>
           
-          <div className="flex flex-wrap justify-center gap-4 mb-6">
-            <button
-              onClick={() => setSelectedCategory(null)}
-              className={`px-6 py-3 rounded-xl font-paragraph transition-all duration-300 ${
-                selectedCategory === null
-                  ? 'bg-primary text-primary-foreground shadow-lg'
-                  : 'bg-background text-secondary-foreground hover:bg-primary/10'
-              }`}
-            >
-              Tất cả chủ đề
-            </button>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {categories.map((category, index) => {
-              const icons = [TrendingUp, GraduationCap, BarChart3, BookOpen];
+              const icons = [BookOpen, TrendingUp, BarChart3, GraduationCap];
               const IconComponent = icons[index % icons.length];
               
               return (
-                <button
-                  key={category._id}
-                  onClick={() => setSelectedCategory(category.categoryName || '')}
-                  className={`px-6 py-3 rounded-xl font-paragraph transition-all duration-300 flex items-center gap-2 ${
-                    selectedCategory === category.categoryName
-                      ? 'bg-primary text-primary-foreground shadow-lg'
-                      : 'bg-background text-secondary-foreground hover:bg-primary/10'
-                  }`}
-                >
-                  <IconComponent className="h-4 w-4" />
-                  {category.categoryName}
-                </button>
+                <Card key={category._id} className="bg-background border-0 shadow-sm hover:shadow-md transition-all duration-300 group">
+                  <CardHeader className="text-center pb-4">
+                    <div className="p-4 bg-primary/10 rounded-2xl w-fit mx-auto mb-4 group-hover:bg-primary/20 transition-colors duration-300">
+                      <IconComponent className="h-8 w-8 text-primary" />
+                    </div>
+                    <CardTitle className="font-heading text-lg text-secondary-foreground">
+                      {category.categoryName}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="text-center">
+                    <p className="font-paragraph text-sm text-secondary-foreground/70 leading-relaxed">
+                      {category.categoryDescription}
+                    </p>
+                  </CardContent>
+                </Card>
               );
             })}
           </div>
         </div>
       </section>
 
-      {/* Knowledge Categories Overview */}
-      {!selectedCategory && (
-        <section className="w-full py-16 lg:py-20">
-          <div className="max-w-[100rem] mx-auto px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="font-heading text-3xl lg:text-4xl text-secondary-foreground mb-6">
-                Tổng Quan Các Chủ Đề
-              </h2>
-              <p className="font-paragraph text-lg text-secondary-foreground/80 max-w-3xl mx-auto leading-relaxed">
-                Mỗi chủ đề được thiết kế để cung cấp kiến thức toàn diện và có hệ thống về giá trị thặng dư.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {categories.map((category, index) => {
-                const icons = [TrendingUp, GraduationCap, BarChart3, BookOpen];
-                const IconComponent = icons[index % icons.length];
-                
-                return (
-                  <Card 
-                    key={category._id} 
-                    className="bg-background border-0 shadow-sm hover:shadow-lg transition-all duration-300 group cursor-pointer"
-                    onClick={() => setSelectedCategory(category.categoryName || '')}
-                  >
-                    <CardHeader className="pb-4">
-                      <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center gap-3">
-                          <div className="p-3 bg-primary/10 rounded-xl group-hover:bg-primary/20 transition-colors duration-300">
-                            <IconComponent className="h-6 w-6 text-primary" />
-                          </div>
-                          <Badge variant="secondary" className="text-xs">
-                            Chủ đề {category.displayOrder || index + 1}
-                          </Badge>
-                        </div>
-                        <ArrowRight className="h-5 w-5 text-secondary-foreground/40 group-hover:text-primary group-hover:translate-x-1 transition-all duration-300" />
-                      </div>
-                      <CardTitle className="font-heading text-xl text-secondary-foreground group-hover:text-primary transition-colors duration-300">
-                        {category.categoryName}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <CardDescription className="font-paragraph text-secondary-foreground/70 leading-relaxed">
-                        {category.categoryDescription}
-                      </CardDescription>
-                    </CardContent>
-                  </Card>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Articles/Content Section */}
-      <section className="w-full py-16 lg:py-20 bg-secondary/50">
-        <div className="max-w-[100rem] mx-auto px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="font-heading text-3xl lg:text-4xl text-secondary-foreground mb-6">
-              {selectedCategory ? `Nội dung: ${selectedCategory}` : 'Toàn Bộ Nội Dung Kiến Thức'}
-            </h2>
-            <p className="font-paragraph text-lg text-secondary-foreground/80 max-w-3xl mx-auto leading-relaxed">
-              {selectedCategory 
-                ? `Khám phá chi tiết về ${selectedCategory.toLowerCase()}`
-                : 'Tất cả nội dung kiến thức về giá trị thặng dư được tổ chức và trình bày một cách có hệ thống.'
-              }
-            </p>
-          </div>
-
-          {filteredArticles.length > 0 ? (
-            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
-              {filteredArticles.map((article) => (
-                <Card key={article._id} className="bg-background border-0 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group">
-                  {article.mainImage && (
-                    <div className="aspect-video overflow-hidden">
-                      <Image
-                        src={article.mainImage}
-                        alt={article.title || 'Hình ảnh minh họa'}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        width={400}
-                      />
+      {/* Main Content Sections */}
+      {articles.map((article, index) => {
+        const isEven = index % 2 === 0;
+        const sectionIcons = [DollarSign, Users, Building, Target, TrendingUp, BarChart3];
+        const IconComponent = sectionIcons[index % sectionIcons.length];
+        
+        return (
+          <section key={article._id} className={`w-full py-20 lg:py-24 ${isEven ? 'bg-background' : 'bg-secondary/30'}`}>
+            <div className="max-w-[100rem] mx-auto px-6 lg:px-8">
+              <div className={`grid grid-cols-1 lg:grid-cols-2 gap-16 items-center ${!isEven ? 'lg:grid-flow-col-dense' : ''}`}>
+                {/* Content */}
+                <div className={!isEven ? 'lg:col-start-2' : ''}>
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="p-3 bg-primary/10 rounded-xl">
+                      <IconComponent className="h-6 w-6 text-primary" />
+                    </div>
+                    <Badge variant="secondary" className="text-sm">
+                      Phần {index + 1}
+                    </Badge>
+                  </div>
+                  
+                  <h2 className="font-heading text-3xl lg:text-4xl xl:text-5xl text-secondary-foreground mb-6 leading-tight">
+                    {article.title}
+                  </h2>
+                  
+                  {article.summary && (
+                    <div className="mb-8">
+                      <h3 className="font-heading text-xl text-secondary-foreground mb-4">Tóm tắt</h3>
+                      <p className="font-paragraph text-lg text-secondary-foreground/80 leading-relaxed">
+                        {article.summary}
+                      </p>
                     </div>
                   )}
-                  <CardHeader className="pb-3">
-                    <div className="flex items-center justify-between mb-3">
-                      <Badge variant="outline" className="text-xs">
-                        <User className="h-3 w-3 mr-1" />
-                        {article.author || 'Tác giả'}
-                      </Badge>
-                      {article.publishDate && (
-                        <div className="flex items-center text-xs text-secondary-foreground/60">
-                          <Calendar className="h-3 w-3 mr-1" />
-                          {new Date(article.publishDate).toLocaleDateString('vi-VN')}
-                        </div>
-                      )}
+                  
+                  {article.content && (
+                    <div className="prose prose-lg max-w-none">
+                      <div className="font-paragraph text-secondary-foreground/90 leading-relaxed whitespace-pre-line">
+                        {article.content}
+                      </div>
                     </div>
-                    <CardTitle className="font-heading text-lg text-secondary-foreground line-clamp-2 group-hover:text-primary transition-colors duration-300">
-                      {article.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="font-paragraph text-secondary-foreground/70 leading-relaxed line-clamp-3 mb-4">
-                      {article.summary}
-                    </CardDescription>
-                    {article.content && (
-                      <>
-                        <Separator className="my-4" />
-                        <div className="font-paragraph text-sm text-secondary-foreground/80 leading-relaxed line-clamp-4">
-                          {article.content}
-                        </div>
-                      </>
-                    )}
-                  </CardContent>
-                </Card>
-              ))}
+                  )}
+                  
+                  {article.author && (
+                    <div className="mt-8 pt-6 border-t border-secondary">
+                      <p className="font-paragraph text-sm text-secondary-foreground/60">
+                        Tác giả: <span className="font-medium text-secondary-foreground">{article.author}</span>
+                        {article.publishDate && (
+                          <span className="ml-4">
+                            Xuất bản: {new Date(article.publishDate).toLocaleDateString('vi-VN')}
+                          </span>
+                        )}
+                      </p>
+                    </div>
+                  )}
+                </div>
+                
+                {/* Image */}
+                {article.mainImage && (
+                  <div className={`${!isEven ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
+                    <div className="relative">
+                      <div className="aspect-[4/3] overflow-hidden rounded-2xl shadow-lg">
+                        <Image
+                          src={article.mainImage}
+                          alt={article.title || 'Hình ảnh minh họa'}
+                          className="w-full h-full object-cover"
+                          width={600}
+                        />
+                      </div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
-          ) : (
-            <div className="text-center py-16">
-              <BookOpen className="h-16 w-16 text-secondary-foreground/40 mx-auto mb-4" />
-              <h3 className="font-heading text-xl text-secondary-foreground mb-2">
-                {selectedCategory ? 'Chưa có nội dung cho chủ đề này' : 'Chưa có nội dung'}
-              </h3>
-              <p className="font-paragraph text-secondary-foreground/60">
-                {selectedCategory 
-                  ? 'Nội dung cho chủ đề này đang được cập nhật.'
-                  : 'Nội dung kiến thức đang được cập nhật.'
-                }
-              </p>
-              {selectedCategory && (
-                <button
-                  onClick={() => setSelectedCategory(null)}
-                  className="mt-4 px-6 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors duration-300"
-                >
-                  Xem tất cả chủ đề
-                </button>
-              )}
-            </div>
-          )}
-        </div>
-      </section>
+            
+            {/* Section Separator */}
+            {index < articles.length - 1 && (
+              <div className="max-w-[100rem] mx-auto px-6 lg:px-8 mt-20">
+                <Separator className="bg-secondary-foreground/10" />
+              </div>
+            )}
+          </section>
+        );
+      })}
 
-      {/* Knowledge Statistics */}
-      <section className="w-full py-16 lg:py-20">
+      {/* Summary Section */}
+      <section className="w-full py-20 lg:py-24 bg-primary text-primary-foreground">
         <div className="max-w-[100rem] mx-auto px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="p-4 bg-primary/10 rounded-2xl w-fit mx-auto mb-4">
-                <BookOpen className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="font-heading text-2xl text-secondary-foreground mb-2">
-                {categories.length}
-              </h3>
-              <p className="font-paragraph text-secondary-foreground/70">
-                Chủ đề kiến thức
-              </p>
-            </div>
+          <div className="text-center max-w-4xl mx-auto">
+            <h2 className="font-heading text-3xl lg:text-4xl xl:text-5xl mb-8 leading-tight">
+              Kết Luận
+            </h2>
+            <p className="font-paragraph text-xl lg:text-2xl opacity-90 leading-relaxed mb-12">
+              Giá trị thặng dư là một khái niệm quan trọng trong kinh tế học, giúp chúng ta hiểu rõ hơn về 
+              cách thức hoạt động của thị trường và phân phối giá trị trong nền kinh tế.
+            </p>
             
-            <div className="text-center">
-              <div className="p-4 bg-primary/10 rounded-2xl w-fit mx-auto mb-4">
-                <GraduationCap className="h-8 w-8 text-primary" />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+              <div className="text-center">
+                <div className="p-4 bg-primary-foreground/10 rounded-2xl w-fit mx-auto mb-4">
+                  <BookOpen className="h-8 w-8 text-primary-foreground" />
+                </div>
+                <h3 className="font-heading text-xl mb-3">Lý Thuyết</h3>
+                <p className="font-paragraph text-primary-foreground/80">
+                  Nắm vững các khái niệm cơ bản về giá trị thặng dư
+                </p>
               </div>
-              <h3 className="font-heading text-2xl text-secondary-foreground mb-2">
-                {articles.length}
-              </h3>
-              <p className="font-paragraph text-secondary-foreground/70">
-                Bài viết kiến thức
-              </p>
-            </div>
-            
-            <div className="text-center">
-              <div className="p-4 bg-primary/10 rounded-2xl w-fit mx-auto mb-4">
-                <BarChart3 className="h-8 w-8 text-primary" />
+              
+              <div className="text-center">
+                <div className="p-4 bg-primary-foreground/10 rounded-2xl w-fit mx-auto mb-4">
+                  <BarChart3 className="h-8 w-8 text-primary-foreground" />
+                </div>
+                <h3 className="font-heading text-xl mb-3">Ứng Dụng</h3>
+                <p className="font-paragraph text-primary-foreground/80">
+                  Áp dụng kiến thức vào thực tiễn kinh tế
+                </p>
               </div>
-              <h3 className="font-heading text-2xl text-secondary-foreground mb-2">
-                100%
-              </h3>
-              <p className="font-paragraph text-secondary-foreground/70">
-                Nội dung chất lượng
-              </p>
+              
+              <div className="text-center">
+                <div className="p-4 bg-primary-foreground/10 rounded-2xl w-fit mx-auto mb-4">
+                  <TrendingUp className="h-8 w-8 text-primary-foreground" />
+                </div>
+                <h3 className="font-heading text-xl mb-3">Phát Triển</h3>
+                <p className="font-paragraph text-primary-foreground/80">
+                  Tiếp tục nghiên cứu và phát triển hiểu biết
+                </p>
+              </div>
             </div>
           </div>
         </div>
