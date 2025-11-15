@@ -75,9 +75,11 @@ export default function HomePage() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
-                <BookOpen className="mr-2 h-5 w-5" />
-                Khám Phá Nội Dung
+              <Button asChild size="lg" variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+                <Link to="/kien-thuc">
+                  <BookOpen className="mr-2 h-5 w-5" />
+                  Khám Phá Nội Dung
+                </Link>
               </Button>
               <Button asChild size="lg" className="bg-primary-foreground text-primary hover:bg-primary-foreground/90">
                 <Link to="/quiz">
@@ -110,26 +112,28 @@ export default function HomePage() {
                 const IconComponent = icons[index % icons.length];
                 
                 return (
-                  <Card key={category._id} className="bg-background border-0 shadow-sm hover:shadow-lg transition-all duration-300 group cursor-pointer">
-                    <CardHeader className="pb-4">
-                      <div className="flex items-center gap-3 mb-3">
-                        <div className="p-3 bg-primary/10 rounded-xl group-hover:bg-primary/20 transition-colors duration-300">
-                          <IconComponent className="h-6 w-6 text-primary" />
+                  <Link key={category._id} to="/kien-thuc" className="block">
+                    <Card className="bg-background border-0 shadow-sm hover:shadow-lg transition-all duration-300 group cursor-pointer h-full">
+                      <CardHeader className="pb-4">
+                        <div className="flex items-center gap-3 mb-3">
+                          <div className="p-3 bg-primary/10 rounded-xl group-hover:bg-primary/20 transition-colors duration-300">
+                            <IconComponent className="h-6 w-6 text-primary" />
+                          </div>
+                          <Badge variant="secondary" className="text-xs">
+                            Chủ đề {category.displayOrder || index + 1}
+                          </Badge>
                         </div>
-                        <Badge variant="secondary" className="text-xs">
-                          Chủ đề {category.displayOrder || index + 1}
-                        </Badge>
-                      </div>
-                      <CardTitle className="font-heading text-xl text-secondary-foreground group-hover:text-primary transition-colors duration-300">
-                        {category.categoryName}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <CardDescription className="font-paragraph text-secondary-foreground/70 leading-relaxed">
-                        {category.categoryDescription}
-                      </CardDescription>
-                    </CardContent>
-                  </Card>
+                        <CardTitle className="font-heading text-xl text-secondary-foreground group-hover:text-primary transition-colors duration-300">
+                          {category.categoryName}
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <CardDescription className="font-paragraph text-secondary-foreground/70 leading-relaxed">
+                          {category.categoryDescription}
+                        </CardDescription>
+                      </CardContent>
+                    </Card>
+                  </Link>
                 );
               })}
             </div>

@@ -5,6 +5,7 @@ import ErrorPage from '@/integrations/errorHandlers/ErrorPage';
 import Layout from '@/components/Layout';
 import HomePage from '@/components/pages/HomePage';
 import QuizPage from '@/components/pages/QuizPage';
+import KnowledgePage from '@/components/pages/KnowledgePage';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <HomePage />,
+      },
+      {
+        path: "kien-thuc",
+        element: <KnowledgePage />,
       },
       {
         path: "quiz",

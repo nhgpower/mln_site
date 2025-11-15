@@ -1,6 +1,6 @@
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { BookOpen, Calculator, Home } from 'lucide-react';
+import { BookOpen, Calculator, Home, GraduationCap } from 'lucide-react';
 
 export default function Layout() {
   const location = useLocation();
@@ -36,6 +36,17 @@ export default function Layout() {
                 <Link to="/">
                   <Home className="mr-2 h-4 w-4" />
                   Trang Chủ
+                </Link>
+              </Button>
+              
+              <Button 
+                asChild 
+                variant={location.pathname === '/kien-thuc' ? 'default' : 'ghost'}
+                size="sm"
+              >
+                <Link to="/kien-thuc">
+                  <GraduationCap className="mr-2 h-4 w-4" />
+                  Kiến Thức
                 </Link>
               </Button>
               
@@ -86,6 +97,14 @@ export default function Layout() {
                     className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors"
                   >
                     Trang Chủ
+                  </Link>
+                </li>
+                <li>
+                  <Link 
+                    to="/kien-thuc" 
+                    className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+                  >
+                    Kiến Thức
                   </Link>
                 </li>
                 <li>
