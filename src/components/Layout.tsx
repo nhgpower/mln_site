@@ -53,12 +53,10 @@ export default function Layout() {
           </div>
         </div>
       </nav>
-
       {/* Main Content */}
       <main>
         <Outlet />
       </main>
-
       {/* Footer */}
       <footer className="bg-primary text-primary-foreground py-12">
         <div className="max-w-[100rem] mx-auto px-6 lg:px-8">
@@ -111,11 +109,6 @@ export default function Layout() {
             </div>
           </div>
 
-          <div className="border-t border-primary-foreground/20 mt-8 pt-8 text-center">
-            <p className="font-paragraph text-primary-foreground/60 text-sm">
-              © 2024 Kinh Tế Học - Giá Trị Thặng Dư. Tất cả quyền được bảo lưu.
-            </p>
-          </div>
         </div>
       </footer>
     </div>
