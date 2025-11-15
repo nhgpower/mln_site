@@ -1,28 +1,22 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { BaseCrudService } from '@/integrations';
-import { DanhmcKinthc, KinthcvGitrThngd } from '@/entities';
+import { DanhmcKinthc } from '@/entities';
 import { Image } from '@/components/ui/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { BookOpen, Calculator, TrendingUp, Users } from 'lucide-react';
+import { BookOpen, Calculator, TrendingUp, Users, GraduationCap, BarChart3 } from 'lucide-react';
 
 export default function HomePage() {
   const [categories, setCategories] = useState<DanhmcKinthc[]>([]);
-  const [articles, setArticles] = useState<KinthcvGitrThngd[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [categoriesData, articlesData] = await Promise.all([
-          BaseCrudService.getAll<DanhmcKinthc>('danhmckinthc'),
-          BaseCrudService.getAll<KinthcvGitrThngd>('kinthcvgitrthngd')
-        ]);
-        
+        const categoriesData = await BaseCrudService.getAll<DanhmcKinthc>('danhmckinthc');
         setCategories(categoriesData.items.filter(cat => cat.isActive).sort((a, b) => (a.displayOrder || 0) - (b.displayOrder || 0)));
-        setArticles(articlesData.items.sort((a, b) => new Date(b.publishDate || 0).getTime() - new Date(a.publishDate || 0).getTime()));
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
@@ -110,28 +104,34 @@ export default function HomePage() {
 
           {categories.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {categories.map((category) => (
-                <Card key={category._id} className="bg-background border-0 shadow-sm hover:shadow-md transition-shadow duration-300">
-                  <CardHeader className="pb-4">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="p-2 bg-primary/10 rounded-lg">
-                        <TrendingUp className="h-6 w-6 text-primary" />
+              {categories.map((category, index) => {
+                // Rotate through different icons for visual variety
+                const icons = [TrendingUp, GraduationCap, BarChart3, BookOpen];
+                const IconComponent = icons[index % icons.length];
+                
+                return (
+                  <Card key={category._id} className="bg-background border-0 shadow-sm hover:shadow-lg transition-all duration-300 group cursor-pointer">
+                    <CardHeader className="pb-4">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="p-3 bg-primary/10 rounded-xl group-hover:bg-primary/20 transition-colors duration-300">
+                          <IconComponent className="h-6 w-6 text-primary" />
+                        </div>
+                        <Badge variant="secondary" className="text-xs">
+                          Chủ đề {category.displayOrder || index + 1}
+                        </Badge>
                       </div>
-                      <Badge variant="secondary" className="text-xs">
-                        Chủ đề {category.displayOrder || 1}
-                      </Badge>
-                    </div>
-                    <CardTitle className="font-heading text-xl text-secondary-foreground">
-                      {category.categoryName}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="font-paragraph text-secondary-foreground/70 leading-relaxed">
-                      {category.categoryDescription}
-                    </CardDescription>
-                  </CardContent>
-                </Card>
-              ))}
+                      <CardTitle className="font-heading text-xl text-secondary-foreground group-hover:text-primary transition-colors duration-300">
+                        {category.categoryName}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <CardDescription className="font-paragraph text-secondary-foreground/70 leading-relaxed">
+                        {category.categoryDescription}
+                      </CardDescription>
+                    </CardContent>
+                  </Card>
+                );
+              })}
             </div>
           ) : (
             <div className="text-center py-12">
@@ -144,58 +144,72 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Latest Articles Section */}
-      {articles.length > 0 && (
-        <section className="w-full py-16 lg:py-24">
-          <div className="max-w-[100rem] mx-auto px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="font-heading text-3xl lg:text-4xl text-secondary-foreground mb-6">
-                Bài Viết Mới Nhất
-              </h2>
-              <p className="font-paragraph text-lg text-secondary-foreground/80 max-w-3xl mx-auto leading-relaxed">
-                Cập nhật những kiến thức mới nhất về giá trị thặng dư và các khái niệm kinh tế liên quan.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
-              {articles.slice(0, 6).map((article) => (
-                <Card key={article._id} className="bg-background border-0 shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden">
-                  {article.mainImage && (
-                    <div className="aspect-video overflow-hidden">
-                      <Image
-                        src={article.mainImage}
-                        alt={article.title || 'Hình ảnh bài viết'}
-                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                        width={400}
-                      />
-                    </div>
-                  )}
-                  <CardHeader className="pb-3">
-                    <div className="flex items-center justify-between mb-2">
-                      <Badge variant="outline" className="text-xs">
-                        {article.author || 'Tác giả'}
-                      </Badge>
-                      {article.publishDate && (
-                        <span className="text-xs text-secondary-foreground/60">
-                          {new Date(article.publishDate).toLocaleDateString('vi-VN')}
-                        </span>
-                      )}
-                    </div>
-                    <CardTitle className="font-heading text-lg text-secondary-foreground line-clamp-2">
-                      {article.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="font-paragraph text-secondary-foreground/70 leading-relaxed line-clamp-3">
-                      {article.summary}
-                    </CardDescription>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+      {/* Knowledge Features Section */}
+      <section className="w-full py-16 lg:py-24">
+        <div className="max-w-[100rem] mx-auto px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="font-heading text-3xl lg:text-4xl text-secondary-foreground mb-6">
+              Tính Năng Học Tập
+            </h2>
+            <p className="font-paragraph text-lg text-secondary-foreground/80 max-w-3xl mx-auto leading-relaxed">
+              Khám phá các công cụ và phương pháp học tập được thiết kế để tối ưu hóa quá trình tiếp thu kiến thức.
+            </p>
           </div>
-        </section>
-      )}
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Interactive Content */}
+            <Card className="bg-background border-0 shadow-sm hover:shadow-lg transition-all duration-300 group">
+              <CardHeader className="text-center pb-4">
+                <div className="p-4 bg-primary/10 rounded-2xl w-fit mx-auto mb-4 group-hover:bg-primary/20 transition-colors duration-300">
+                  <BookOpen className="h-8 w-8 text-primary" />
+                </div>
+                <CardTitle className="font-heading text-xl text-secondary-foreground">
+                  Nội Dung Tương Tác
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                <CardDescription className="font-paragraph text-secondary-foreground/70 leading-relaxed">
+                  Học tập thông qua các ví dụ thực tế và bài tập tương tác, giúp hiểu sâu về các khái niệm kinh tế.
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            {/* Structured Learning */}
+            <Card className="bg-background border-0 shadow-sm hover:shadow-lg transition-all duration-300 group">
+              <CardHeader className="text-center pb-4">
+                <div className="p-4 bg-primary/10 rounded-2xl w-fit mx-auto mb-4 group-hover:bg-primary/20 transition-colors duration-300">
+                  <GraduationCap className="h-8 w-8 text-primary" />
+                </div>
+                <CardTitle className="font-heading text-xl text-secondary-foreground">
+                  Học Có Hệ Thống
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                <CardDescription className="font-paragraph text-secondary-foreground/70 leading-relaxed">
+                  Kiến thức được sắp xếp theo trình tự logic, từ cơ bản đến nâng cao, phù hợp với mọi trình độ.
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            {/* Assessment Tools */}
+            <Card className="bg-background border-0 shadow-sm hover:shadow-lg transition-all duration-300 group">
+              <CardHeader className="text-center pb-4">
+                <div className="p-4 bg-primary/10 rounded-2xl w-fit mx-auto mb-4 group-hover:bg-primary/20 transition-colors duration-300">
+                  <BarChart3 className="h-8 w-8 text-primary" />
+                </div>
+                <CardTitle className="font-heading text-xl text-secondary-foreground">
+                  Đánh Giá Kiến Thức
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                <CardDescription className="font-paragraph text-secondary-foreground/70 leading-relaxed">
+                  Kiểm tra và đánh giá mức độ hiểu biết thông qua các bài quiz và bài tập thực hành.
+                </CardDescription>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
 
       {/* CTA Section */}
       <section className="w-full bg-primary py-16 lg:py-20">
