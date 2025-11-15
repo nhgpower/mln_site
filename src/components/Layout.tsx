@@ -1,6 +1,6 @@
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { BookOpen, Calculator, Home, GraduationCap } from 'lucide-react';
+import { BookOpen, Home, GraduationCap } from 'lucide-react';
 
 export default function Layout() {
   const location = useLocation();
@@ -49,17 +49,6 @@ export default function Layout() {
                   Kiến Thức
                 </Link>
               </Button>
-              
-              <Button 
-                asChild 
-                variant={location.pathname === '/quiz' ? 'default' : 'ghost'}
-                size="sm"
-              >
-                <Link to="/quiz">
-                  <Calculator className="mr-2 h-4 w-4" />
-                  Quiz
-                </Link>
-              </Button>
             </div>
           </div>
         </div>
@@ -81,7 +70,7 @@ export default function Layout() {
               </h3>
               <p className="font-paragraph text-primary-foreground/80 leading-relaxed">
                 Nền tảng học tập về giá trị thặng dư trong nền kinh tế thị trường, 
-                cung cấp kiến thức cơ bản và bài quiz đánh giá.
+                cung cấp kiến thức cơ bản và tài liệu học tập chuyên sâu.
               </p>
             </div>
 
@@ -105,14 +94,6 @@ export default function Layout() {
                     className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors"
                   >
                     Kiến Thức
-                  </Link>
-                </li>
-                <li>
-                  <Link 
-                    to="/quiz" 
-                    className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors"
-                  >
-                    Làm Bài Quiz
                   </Link>
                 </li>
               </ul>

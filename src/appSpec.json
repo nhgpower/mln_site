@@ -1049,7 +1049,7 @@
       "paletteAccessibilityNotes": "The 'primary' color (#152F23) against 'primaryForeground' (#FFFFFF) achieves excellent contrast exceeding WCAG AA standards for text and UI elements. The 'secondary' color (#E7EBD8) with 'secondaryForeground' (#000000) also meets WCAG AA contrast requirements for body text and smaller UI elements. The 'background' color (#FFFFFF) with black text ensures maximum readability. This palette is optimized for accessibility across all text and interface components."
     }
   },
-  "initialPrompt": "Trang web hiển thị kiến thức về giá trị thặng dư trong nền kinh tế thị trường. Nội dung được phân loại rõ ràng và có một trang riêng cho bài quiz, sử dụng iframe từ https://form.typeform.com/to/wTouQpBm. Toàn bộ nội dung bằng tiếng Việt, không trình bày theo dạng bài blog.",
+  "initialPrompt": "Trang web hiển thị kiến thức về giá trị thặng dư trong nền kinh tế thị trường. Nội dung được phân loại rõ ràng và tập trung vào việc cung cấp tài liệu học tập chuyên sâu. Toàn bộ nội dung bằng tiếng Việt, không trình bày theo dạng bài blog.",
   "status": "READY",
   "revision": "12",
   "createdDate": "2025-10-22T02:17:49.218Z",
@@ -1059,7 +1059,7 @@
     "inspirationImagesUrls": []
   },
   "selectedBrandingPresetId": "50b01882-46af-4a9c-b79d-7b336f2b312f",
-  "plan": "{\"sections\":[{\"id\":\"overview\",\"title\":\"## Overview\",\"content\":\"This website displays knowledge about surplus value in the market economy, with clearly categorized content and a dedicated quiz page using an iframe.\"},{\"id\":\"key-features\",\"title\":\"## Key features\",\"content\":\"- **Content categorization**: Users can explore content organized into distinct categories.\\n- **Quiz page**: Users can take a quiz embedded via an iframe.\"},{\"id\":\"structure\",\"title\":\"## Structure\",\"content\":\"- **Homepage**: Users can view categorized content about surplus value in the market economy.\\n- **Quiz Page**: Users can take a quiz embedded from Typeform.\"}],\"apps\":[{\"id\":\"wix-cms\",\"keyFeatures\":[{\"id\":\"content-categorization\",\"name\":\"Content categorization\"},{\"id\":\"quiz-page\",\"name\":\"Quiz page\"}]}],\"version\":\"2.2\"}",
+  "plan": "{\"sections\":[{\"id\":\"overview\",\"title\":\"## Overview\",\"content\":\"This website displays knowledge about surplus value in the market economy, with clearly categorized content focused on providing comprehensive learning materials.\"},{\"id\":\"key-features\",\"title\":\"## Key features\",\"content\":\"- **Content categorization**: Users can explore content organized into distinct categories.\\n- **Learning materials**: Users can access comprehensive educational resources.\"},{\"id\":\"structure\",\"title\":\"## Structure\",\"content\":\"- **Homepage**: Users can view categorized content about surplus value in the market economy.\\n- **Knowledge Page**: Users can access detailed learning materials and resources.\"}],\"apps\":[{\"id\":\"wix-cms\",\"keyFeatures\":[{\"id\":\"content-categorization\",\"name\":\"Content categorization\"},{\"id\":\"learning-materials\",\"name\":\"Learning materials\"}]}],\"version\":\"2.2\"}",
   "designerData": {
     "designerId": "643efd59-4335-4582-a3a6-9a56a8750a37",
     "designerName": "Isla",

@@ -6,7 +6,7 @@ import { Image } from '@/components/ui/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { BookOpen, Calculator, TrendingUp, Users, GraduationCap, BarChart3, RefreshCw, ArrowRight } from 'lucide-react';
+import { BookOpen, TrendingUp, Users, GraduationCap, BarChart3, RefreshCw, ArrowRight } from 'lucide-react';
 
 export default function HomePage() {
   const [categories, setCategories] = useState<DanhmcKinthc[]>([]);
@@ -79,12 +79,6 @@ export default function HomePage() {
                 <Link to="/kien-thuc">
                   <BookOpen className="mr-2 h-5 w-5" />
                   Khám Phá Nội Dung
-                </Link>
-              </Button>
-              <Button asChild size="lg" className="bg-primary-foreground text-primary hover:bg-primary-foreground/90">
-                <Link to="/quiz">
-                  <Calculator className="mr-2 h-5 w-5" />
-                  Làm Bài Quiz
                 </Link>
               </Button>
             </div>
@@ -334,7 +328,7 @@ export default function HomePage() {
               </CardHeader>
               <CardContent className="text-center">
                 <CardDescription className="font-paragraph text-secondary-foreground/70 leading-relaxed">
-                  Kiểm tra và đánh giá mức độ hiểu biết thông qua các bài quiz và bài tập thực hành.
+                  Kiểm tra và đánh giá mức độ hiểu biết thông qua các bài tập thực hành và tài liệu tham khảo.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -345,15 +339,15 @@ export default function HomePage() {
       <section className="w-full bg-primary py-16 lg:py-20">
         <div className="max-w-[100rem] mx-auto px-6 lg:px-8 text-center">
           <h2 className="font-heading text-3xl lg:text-4xl text-primary-foreground mb-6">
-            Kiểm Tra Kiến Thức Của Bạn
+            Bắt Đầu Hành Trình Học Tập
           </h2>
           <p className="font-paragraph text-lg text-primary-foreground/90 mb-8 max-w-2xl mx-auto leading-relaxed">
-            Hoàn thành bài quiz để đánh giá mức độ hiểu biết của bạn về giá trị thặng dư trong nền kinh tế thị trường.
+            Khám phá kiến thức chuyên sâu về giá trị thặng dư và nắm vững các nguyên lý kinh tế cơ bản một cách có hệ thống.
           </p>
           <Button asChild size="lg" className="bg-primary-foreground text-primary hover:bg-primary-foreground/90">
-            <Link to="/quiz">
-              <Calculator className="mr-2 h-5 w-5" />
-              Bắt Đầu Quiz Ngay
+            <Link to="/kien-thuc">
+              <BookOpen className="mr-2 h-5 w-5" />
+              Khám Phá Kiến Thức
             </Link>
           </Button>
         </div>
